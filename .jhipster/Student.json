@@ -1,0 +1,524 @@
+{
+    "name": "Student",
+    "fields": [
+        {
+            "fieldName": "studentName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentMiddleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentLastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherMiddleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherLastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherMiddleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherLastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentAadharNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentPanNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentSocialSecurityNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentTaxReferenceNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentBplNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentDrivingLicenseNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentPassportNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateOfBirth",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "placeOfBirth",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "religion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "caste",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "subCaste",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "sex",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentLocalAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentPermanentAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pinCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentPrimaryCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentAlternateCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentLandLinePhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentPrimaryEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentAlternateEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "relationWithStudent",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emergencyContactName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emergencyContactMiddleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emergencyContactLastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emergencyContactCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emergencyContactLandLinePhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emergencyContactEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentImagePath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "admissionNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "enrollmentNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "rollNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studentType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherOccupation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherOfficeEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherOfficeAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherOfficeCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherOfficeLandLinePhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherAadharNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherPanNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherSocialSecurityNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherTaxReferenceNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherBplNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherDrivingLicenseNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherPassportNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fatherImagePath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherOccupation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherOfficeEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherOfficeAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherOfficeCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherOfficeLandLinePhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherAadharNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherPanNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherSocialSecurityNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherTaxReferenceNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherBplNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherDrivingLicenseNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherPassportNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "motherImagePath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianMiddleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianLastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianLandLinePhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianOccupation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianOfficeEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianOfficeAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianOfficeCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianOfficeLandLinePhoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "guardianImagePath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isGuardianSponsorAgency",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 3
+        },
+        {
+            "fieldName": "sponsorAgencyName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyRegistrationNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyLandLineNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAppointeeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAppointeeDesignation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAppointeeCellNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAppointeeLandLineNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAppointeeEmailId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sponsorAgencyAppointeeOfficeAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isPhysicallyChallenged",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 3
+        },
+        {
+            "fieldName": "detailsOfDisability",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        },
+        {
+            "fieldName": "disabilityCertificateNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "disabilityCertificateIssueAuthority",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "disabilityCertificateIssueDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "percentagOfDisability",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "bloodGroup",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "vaccinationDetails",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        },
+        {
+            "fieldName": "otherMedicalDetails",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedOn",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "departmentId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "branchId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "sectionId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "batchId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "academicYearId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200505090420",
+    "entityTableName": "student",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "Student",
+    "applications": "*",
+    "microserviceName": "Student"
+}

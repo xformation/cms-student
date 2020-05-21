@@ -1,0 +1,52 @@
+{
+    "name": "AcademicHistory",
+    "fields": [
+        {
+            "fieldName": "qualification",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "yearOfPassing",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "institution",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "university",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "enrollmentNo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "percentage",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "academicHistory",
+            "relationshipName": "student",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200505090421",
+    "entityTableName": "academic_history",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "Student",
+    "applications": "*",
+    "microserviceName": "Student"
+}

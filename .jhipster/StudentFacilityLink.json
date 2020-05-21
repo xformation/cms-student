@@ -1,0 +1,32 @@
+{
+    "name": "StudentFacilityLink",
+    "fields": [
+        {
+            "fieldName": "linkDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "facilityId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "studentFacilityLink",
+            "relationshipName": "student",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200505090422",
+    "entityTableName": "student_facility_link",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "Student",
+    "applications": "*",
+    "microserviceName": "Student"
+}

@@ -1,11 +1,11 @@
 package com.synectiks.student.security;
 
-import com.synectiks.student.config.Constants;
-
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
+
+import com.synectiks.student.config.Constants;
 
 /**
  * Implementation of {@link AuditorAware} based on Spring Security.
