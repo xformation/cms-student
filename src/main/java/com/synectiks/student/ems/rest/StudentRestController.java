@@ -13,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
+import com.synectiks.student.business.service.CmsStudentService;
+import com.synectiks.student.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +63,11 @@ public class StudentRestController {
 
     private static final String ENTITY_NAME = "student";
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     ApplicationProperties applicationProperties;
-    
+
     @Autowired
     private StudentRepository studentRepository;
 
@@ -72,7 +76,10 @@ public class StudentRestController {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
+
+    @Autowired
+    private CmsStudentService cmsStudentService;
+
     @PostMapping("/cmsstudents-bulk-load")
     public List<CmsStudentVo> bulkLoad(@RequestBody List<CmsStudentVo> list) throws Exception {
         List<CmsStudentVo> failedRecords = new ArrayList<>();
@@ -279,6 +286,13 @@ public class StudentRestController {
         return ls;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/student-by-filters")
+    public List<Student> getStudentListOnFilterCriteria(@RequestParam Map<String, String> dataMap) throws Exception {
+        logger.debug("Rest request to get list of Students based on filter criteria");
+        List<Student> list = this.cmsStudentService.getStudentListOnFilterCriteria(dataMap);
+        return list;
+    }
+
     /**
      * GET  /students/:id : get the "id" student.
      *
@@ -355,9 +369,9 @@ public class StudentRestController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/send-student-to-kafka")
     public void pushToKafka(@RequestParam Map<String, String> dataMap) {
-    	log.info("Start pushing student entities to kafka"); 
+    	log.info("Start pushing student entities to kafka");
     	String url = this.applicationProperties.getPrefSrvUrl(); //+ "/api/academic-years-by-filters";
-    	
+
     	List<AcademicYear> ayList = null;
     	if(!CommonUtil.isNullOrEmpty(dataMap.get("academicYear"))) {
     		String ayUrl = url + "/api/academic-years-by-filters?description"+CommonUtil.isNullOrEmpty(dataMap.get("academicYear"));
@@ -376,12 +390,12 @@ public class StudentRestController {
     			return;
     		}
     	}
-    	
+
     	log.debug("Academic year list : ", ayList);
     	Student st = new Student();
     	st.setAcademicYearId(ayList.get(0).getId());
     	List<Student> list = this.studentRepository.findAll(Example.of(st));
-    	
+
     	SynectiksJPARepo repo = new SynectiksJPARepo(Student.class, entityManager);
     	String batchUrl = url + "/batch-by-id/";
     	String sectionUrl = url + "/section-by-id/";
@@ -394,7 +408,7 @@ public class StudentRestController {
     	}
     	log.info("All student entities successfully uploaded to kafka");
     }
-    
+
 //    private void fireEvent(EventType type, Student entity) {
 //        	Environment env = StudentApp.getBean(Environment.class);
 //        	RestTemplate rest = StudentApp.getBean(RestTemplate.class);
@@ -415,7 +429,7 @@ public class StudentRestController {
 //				log.error(ex.getMessage(), ex);
 //				res = null;
 //			}
-//			
+//
 //		} else {
 //			log.error("Entity should not be null");
 //		}

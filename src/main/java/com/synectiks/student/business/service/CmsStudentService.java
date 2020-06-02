@@ -1,13 +1,16 @@
 package com.synectiks.student.business.service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.synectiks.student.config.ApplicationProperties;
@@ -36,20 +39,20 @@ public class CmsStudentService {
 
 	@Autowired
     private ApplicationProperties applicationProperties;
-    
+
     @Autowired
     private StudentRepository studentRepository;
 
     @Autowired
     private CommonService commonService;
-    
+
     @Autowired
     private StudentFacilityLinkRepository studentFacilityLinkRepository;
-    
-    
+
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    
+
 //    public List<Student> searchStudent(Long departmentId, Long batchId, Long sectionId, Long branchId, Gender gender, StudentTypeEnum studentType, String studentName) {
 //        Student std = new Student();
 //
@@ -99,7 +102,7 @@ public class CmsStudentService {
     	}
     	return null;
     }
-    
+
     public List<Student> searchStudent(StudentListFilterInput filter) {
         Student student = new Student();
         if(!CommonUtil.isNullOrEmpty(filter.getBranchId())) {
@@ -260,18 +263,18 @@ public class CmsStudentService {
             student.setDepartmentId(cmsStudentVo.getDepartmentId());
             student.setBranchId(cmsStudentVo.getBranchId());
             student.setAcademicYearId(cmsStudentVo.getAcademicYearId());
-            
+
             student.setDateOfBirth(cmsStudentVo.getStrDateOfBirth() != null ? DateFormatUtil.convertStringToLocalDate(cmsStudentVo.getStrDateOfBirth(), CmsConstants.DATE_FORMAT_dd_MM_yyyy) : null);
-            
+
             String prefUrl = applicationProperties.getPrefSrvUrl();
             if(cmsStudentVo.getBranchId() != null) {
             	String url = prefUrl+"/api/batch-by-id/"+cmsStudentVo.getBranchId();
             	Branch branch = this.commonService.getObject(url, Branch.class);
-            	if(branch != null) { 
+            	if(branch != null) {
             		student.setBranchName(branch.getBranchName());
             	}
             }
-            
+
             if(cmsStudentVo.getDepartmentId() != null) {
 //            	Department department = this.commonService.getDepartmentById(cmsStudentVo.getDepartmentId());
             	String url = prefUrl+"/api/department-by-id/"+cmsStudentVo.getDepartmentId();
@@ -280,7 +283,7 @@ public class CmsStudentService {
             		student.setDepartmentName(department.getName());
             	}
             }
-            
+
             if(cmsStudentVo.getBatchId() != null) {
 //            	Batch batch = this.commonService.getBatchById(cmsStudentVo.getBatchId());
             	String url = prefUrl+"/api/batch-by-id/"+cmsStudentVo.getBatchId();
@@ -289,7 +292,7 @@ public class CmsStudentService {
             		student.setBatchName(batch.getBatch().toString());
             	}
             }
-            
+
             if(cmsStudentVo.getSectionId() != null) {
 //            	Section section = this.commonService.getSectionById(cmsStudentVo.getSectionId());
             	String url = prefUrl+"/api/section-by-id/"+cmsStudentVo.getSectionId();
@@ -298,17 +301,17 @@ public class CmsStudentService {
             		student.setSectionName(section.getSection().toString());
             	}
             }
-            
+
             if(cmsStudentVo.getAcademicYearId() != null) {
 //            	AcademicYear ay = this.commonService.getAcademicYearById(cmsStudentVo.getAcademicYearId());
             	String url = prefUrl+"/api/academic-years-by-id/"+cmsStudentVo.getAcademicYearId();
             	AcademicYear ay = this.commonService.getObject(url, AcademicYear.class);
-            
+
             	if(ay != null) {
             		student.setAcademicYear(ay.getDescription());
             	}
             }
-            
+
             student = this.studentRepository.save(student);
             vo = CommonUtil.createCopyProperties(student, CmsStudentVo.class);
             vo.setStrDateOfBirth(student.getDateOfBirth() != null ? DateFormatUtil.changeLocalDateFormat(student.getDateOfBirth(), CmsConstants.DATE_FORMAT_dd_MM_yyyy) : "");
@@ -339,7 +342,7 @@ public class CmsStudentService {
     	String url = this.applicationProperties.getFeeSrvUrl()+"/api/feedetails-by-filters";
     	url = url+ "?departmentId="+vo.getDepartmentId()+"&batchId="+vo.getBatchId()+"&studentType="+vo.getStudentType()+"&gender="+vo.getSex()+"&branchId"+vo.getBranchId();
     	List<FeeDetails> list = this.commonService.getList(url);
-    	
+
 //    	FeeDetails feeDetails = new FeeDetails();
 //    	feeDetails.setDepartmentId(vo.getDepartmentId());
 //    	feeDetails.setBatchId(vo.getBatchId());
@@ -355,7 +358,7 @@ public class CmsStudentService {
 //    	Collections.sort(list, (o1, o2) -> o2.getFeeParticularsName().compareTo(o1.getFeeParticularsName()));
     	return list;
     }
-    
+
     public Float getTotalFees(List<FeeDetails> feeDetailsList, List<StudentFacilityLink> facilityList) {
     	Float total = 0F;
     	for(FeeDetails fd: feeDetailsList) {
@@ -369,7 +372,7 @@ public class CmsStudentService {
     	}
     	return total;
     }
-    
+
     public Long getTotalFeePaid(CmsStudentVo vo) {
 //    	Invoice invoice = new Invoice();
 //    	Student student = CommonUtil.createCopyProperties(vo, Student.class);
@@ -385,7 +388,7 @@ public class CmsStudentService {
     	}
     	return total;
     }
-    
+
     public Long getTotalFeeOverDue(CmsStudentVo vo) {
 //    	Invoice invoice = new Invoice();
 //    	Student student = CommonUtil.createCopyProperties(vo, Student.class);
@@ -401,7 +404,7 @@ public class CmsStudentService {
     	}
     	return total;
     }
-    
+
     public List<StudentFacilityLink> getFacilityList(CmsStudentVo vo){
     	StudentFacilityLink studentFacilityLink = new StudentFacilityLink();
     	Student student = CommonUtil.createCopyProperties(vo, Student.class);
@@ -410,11 +413,11 @@ public class CmsStudentService {
 //    Collections.sort(list, (o1, o2) -> o1.getFacility().getName().compareTo(o2.getFacility().getName()));
     	return list;
     }
-    
+
     public List<CmsInvoice> getPaymentHistory(CmsStudentVo vo){
     	String feeUrl = applicationProperties.getFeeSrvUrl() + "/api/cmsinvoice-by-filters?studentId="+vo.getId()+"&branchId="+vo.getBranchId();
     	List<CmsInvoice> list = this.commonService.getList(feeUrl);
-    	
+
 //    	Invoice invoice = new Invoice();
 //    	Student student = CommonUtil.createCopyProperties(vo, Student.class);
 //    	invoice.setStudent(student);
@@ -440,13 +443,41 @@ public class CmsStudentService {
 //    	Collections.sort(list, (o1, o2) -> o2.getId().compareTo(o1.getId()));
     	return list;
     }
-    
+
     private List<Invoice> getInvoiceList(CmsStudentVo vo, String paymentStatus){
     	String feeUrl = applicationProperties.getFeeSrvUrl() + "/api/invoice-by-filters?studentId="+vo.getId()+"&branchId="+vo.getBranchId()+"&academicYearId="+vo.getAcademicYearId()+"&paymentStatus="+paymentStatus;
     	List<Invoice> list = this.commonService.getList(feeUrl);
     	return list;
     }
-    
-	
+
+    public List<Student> getStudentListOnFilterCriteria(Map<String, String> criteriaMap){
+        Student st = new Student();
+        boolean isFilter = false;
+        if(criteriaMap.get("id") != null) {
+            st.setId(Long.parseLong(criteriaMap.get("id")));
+            isFilter = true;
+        }
+        if(criteriaMap.get("branchId") != null) {
+            st.setBranchId(Long.parseLong(criteriaMap.get("branchId")));
+            isFilter = true;
+        }
+
+        if(criteriaMap.get("departmentId") != null) {
+            st.setDepartmentId(Long.parseLong(criteriaMap.get("departmentId")));
+            isFilter = true;
+        }
+
+        List<Student> list = null;
+        if(isFilter) {
+            list = this.studentRepository.findAll(Example.of(st), Sort.by(Sort.Direction.DESC, "id"));
+        }else {
+            list = this.studentRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        }
+
+        Collections.sort(list, (o1, o2) -> o2.getId().compareTo(o1.getId()));
+        return list;
+    }
+
+
 }
 
