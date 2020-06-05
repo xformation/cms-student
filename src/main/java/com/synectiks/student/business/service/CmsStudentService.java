@@ -164,7 +164,6 @@ public class CmsStudentService {
             student.setPlaceOfBirth(cmsStudentVo.getPlaceOfBirth());
             student.setReligion(cmsStudentVo.getReligion());
             student.setCaste(cmsStudentVo.getCaste());
-            student.setCaste(cmsStudentVo.getCaste());
             student.setSubCaste(cmsStudentVo.getSubCaste());
             student.setAge(cmsStudentVo.getAge());
             student.setSex(cmsStudentVo.getSex());
@@ -268,7 +267,7 @@ public class CmsStudentService {
 
             String prefUrl = applicationProperties.getPrefSrvUrl();
             if(cmsStudentVo.getBranchId() != null) {
-            	String url = prefUrl+"/api/batch-by-id/"+cmsStudentVo.getBranchId();
+            	String url = prefUrl+"/api/branch-by-id/"+cmsStudentVo.getBranchId();
             	Branch branch = this.commonService.getObject(url, Branch.class);
             	if(branch != null) {
             		student.setBranchName(branch.getBranchName());
