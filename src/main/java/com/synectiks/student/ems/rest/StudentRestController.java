@@ -115,7 +115,11 @@ public class StudentRestController {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(vo);
     }
-
+    @RequestMapping(method = RequestMethod.GET, value = "/student-by-id/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id) throws Exception {
+        logger.debug("REST request to get a Student : {}", id);
+        return ResponseUtil.wrapOrNotFound(Optional.of(this.cmsStudentService.getStudent(id)));
+    }
     @PostMapping("/cms-grant-admission-to-student")
     public Long grantAdmissionToStudent(@RequestBody CmsStudentVo cmsStudentVo, @RequestParam Map<String, String> dataMap) throws Exception {
         log.debug("REST request to save a student : {}", cmsStudentVo);
@@ -299,19 +303,19 @@ public class StudentRestController {
      * @param id the id of the studentDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the studentDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/cmsstudents/{id}")
-    public ResponseEntity<CmsStudentVo> getStudent(@PathVariable Long id) {
-        log.debug("REST request to get Student : {}", id);
-        Optional<Student> studentDTO = studentRepository.findById(id);
-        CmsStudentVo vo = null;
-        if(studentDTO.isPresent()) {
-        	Student st = studentDTO.get();
-        	vo = CommonUtil.createCopyProperties(st,  CmsStudentVo.class);
-        }else {
-        	vo = new  CmsStudentVo();
-        }
-        return ResponseUtil.wrapOrNotFound(Optional.of(vo));
-    }
+//    @GetMapping("/cmsstudents/{id}")
+//    public ResponseEntity<CmsStudentVo> getStudent(@PathVariable Long id) {
+//        log.debug("REST request to get Student : {}", id);
+//        Optional<Student> studentDTO = studentRepository.findById(id);
+//        CmsStudentVo vo = null;
+//        if(studentDTO.isPresent()) {
+//        	Student st = studentDTO.get();
+//        	vo = CommonUtil.createCopyProperties(st,  CmsStudentVo.class);
+//        }else {
+//        	vo = new  CmsStudentVo();
+//        }
+//        return ResponseUtil.wrapOrNotFound(Optional.of(vo));
+//    }
 
     public List<CmsStudentVo> getStudentListByName(String name) {
     	Student student = null;
