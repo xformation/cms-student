@@ -1,10 +1,7 @@
 package com.synectiks.student.business.service;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -340,7 +337,7 @@ public class CmsStudentService {
     public List<FeeDetails> getFeeDetailsList(CmsStudentVo vo){
     	String url = this.applicationProperties.getFeeSrvUrl()+"/api/feedetails-by-filters";
     	url = url+ "?departmentId="+vo.getDepartmentId()+"&batchId="+vo.getBatchId()+"&studentType="+vo.getStudentType()+"&gender="+vo.getSex()+"&branchId"+vo.getBranchId();
-    	List<FeeDetails> list = this.commonService.getList(url);
+    	FeeDetails[] list = this.commonService.getObject(url,FeeDetails[].class);
 
 //    	FeeDetails feeDetails = new FeeDetails();
 //    	feeDetails.setDepartmentId(vo.getDepartmentId());
@@ -355,7 +352,7 @@ public class CmsStudentService {
 //    		}
 //    	}
 //    	Collections.sort(list, (o1, o2) -> o2.getFeeParticularsName().compareTo(o1.getFeeParticularsName()));
-    	return list;
+    	return Arrays.asList(list);
     }
 
     public Float getTotalFees(List<FeeDetails> feeDetailsList, List<StudentFacilityLink> facilityList) {
@@ -415,7 +412,7 @@ public class CmsStudentService {
 
     public List<CmsInvoice> getPaymentHistory(CmsStudentVo vo){
     	String feeUrl = applicationProperties.getFeeSrvUrl() + "/api/cmsinvoice-by-filters?studentId="+vo.getId()+"&branchId="+vo.getBranchId();
-    	List<CmsInvoice> list = this.commonService.getList(feeUrl);
+    	CmsInvoice[] list = this.commonService.getObject(feeUrl,CmsInvoice[].class);
 
 //    	Invoice invoice = new Invoice();
 //    	Student student = CommonUtil.createCopyProperties(vo, Student.class);
@@ -440,13 +437,13 @@ public class CmsStudentService {
 //    		list.add(cinv);
 //    	}
 //    	Collections.sort(list, (o1, o2) -> o2.getId().compareTo(o1.getId()));
-    	return list;
+    	return Arrays.asList(list);
     }
 
     private List<Invoice> getInvoiceList(CmsStudentVo vo, String paymentStatus){
     	String feeUrl = applicationProperties.getFeeSrvUrl() + "/api/invoice-by-filters?studentId="+vo.getId()+"&branchId="+vo.getBranchId()+"&academicYearId="+vo.getAcademicYearId()+"&paymentStatus="+paymentStatus;
-    	List<Invoice> list = this.commonService.getList(feeUrl);
-    	return list;
+    	Invoice[] list = this.commonService.getObject(feeUrl,Invoice[].class);
+    	return Arrays.asList(list);
     }
 
     public List<Student> getStudentListOnFilterCriteria(Map<String, String> criteriaMap){

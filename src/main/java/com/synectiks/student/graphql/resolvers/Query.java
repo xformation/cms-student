@@ -39,8 +39,8 @@ public class Query implements GraphQLQueryResolver {
     //Needed
     public List<CmsInvoice>  getInvoices(Long studentId, Long branchId){
     	String feeUrl = applicationProperties.getFeeSrvUrl() + "/api/cmsinvoice-by-filters?studentId="+studentId+"&branchId="+branchId;
-    	List<CmsInvoice> list = this.commonService.getList(feeUrl);
-        return list;
+    	CmsInvoice[] list = this.commonService.getObject(feeUrl,CmsInvoice[].class);
+        return Arrays.asList(list);
     }
 
 

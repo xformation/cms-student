@@ -47,10 +47,10 @@ public class Mutation implements GraphQLMutationResolver {
 
     @Autowired
     private StudentFilterProcessor studentFilterProcessor;
-    
+
     @Autowired
     private ApplicationProperties applicationProperties;
-    
+
     public StudentPayload saveStudent(StudentInput cmsStudentVo) {
 	    CmsStudentVo vo = this.cmsStudentService.addStudent(cmsStudentVo);
 	    return new StudentPayload(vo);
@@ -58,7 +58,7 @@ public class Mutation implements GraphQLMutationResolver {
 
     public AddInvoicePayload addInvoice(AddInvoiceInput addInvoiceInput) {
     	Invoice invoice   = new Invoice();
-        
+
     	if(addInvoiceInput.getFeeCategoryId() != null) {
     		String url = this.applicationProperties.getFeeSrvUrl()+"/feecategory-by-id/"+addInvoiceInput.getFeeCategoryId();
     		FeeCategory obj = this.commonService.getObject(url, FeeCategory.class);
@@ -70,7 +70,7 @@ public class Mutation implements GraphQLMutationResolver {
     	if(addInvoiceInput.getFeeDetailsId() != null) {
     		String url = this.applicationProperties.getFeeSrvUrl()+"/feedetails-by-id/"+addInvoiceInput.getFeeDetailsId();
     		FeeDetails obj = this.commonService.getObject(url, FeeDetails.class);
-    		
+
 //    		Optional<FeeDetails> feeDetails = feeDetailsRepository.findById(addInvoiceInput.getFeeDetailsId());
     		if(obj != null) {
     			invoice.setFeeDetails(obj);
@@ -82,7 +82,7 @@ public class Mutation implements GraphQLMutationResolver {
 //    		Optional<DueDate> dueDate = dueDateRepository.findById(addInvoiceInput.getDueDateId());
     		if(obj != null) {
     			invoice.setDueDate(obj);
-    	        
+
     		}
     	}
     	if(addInvoiceInput.getPaymentRemainderId() != null) {
@@ -93,9 +93,9 @@ public class Mutation implements GraphQLMutationResolver {
     			invoice.setPaymentRemainder(obj);
     		}
     	}
-        
+
         Student student = this.cmsStudentService.getStudent(addInvoiceInput.getStudentId());
-        
+
     	invoice.setStudentId(addInvoiceInput.getStudentId());
         invoice.setBranchId(addInvoiceInput.getBranchId());
         invoice.setAcademicYearId(addInvoiceInput.getAcademicyearId());
@@ -110,22 +110,22 @@ public class Mutation implements GraphQLMutationResolver {
         invoice.setInvoiceNumber(String.valueOf(addInvoiceInput.getStudentId())+""+String.valueOf(dt));
         invoice.setPaymentDate(LocalDate.now());
         invoice.setBank(addInvoiceInput.getBank());
-        
+
         CmsStudentVo vo = CommonUtil.createCopyProperties(student, CmsStudentVo.class);
         vo.setFeeDetailsList(this.studentFilterProcessor.getFeeDetailsList(vo));
 		vo.setFacilityList(this.studentFilterProcessor.getFacilityList(vo));
-		
+
 		Float totalFee = this.cmsStudentService.getTotalFees(vo.getFeeDetailsList(), vo.getFacilityList());
         Long totalFeePaid = this.cmsStudentService.getTotalFeePaid(vo);
         Long outstandingAmount = totalFee.longValue() -  (totalFeePaid + addInvoiceInput.getAmountPaid());
         invoice.setOutStandingAmount(outstandingAmount);
         //        invoice.setNextPaymentDate();
-        
+
 //        invoice.setOnlineTxnRefNumber(addInvoiceInput.getOnlineTxnRefNumber());
 //        invoice.setComments(addInvoiceInput.getComments());
 //        invoice.setCollegeId(addInvoiceInput.getCollegeId());
-        
-        String url = this.applicationProperties.getFeeSrvUrl()+"/cmsinvoice";
+
+        String url = this.applicationProperties.getFeeSrvUrl()+"/api/cmsinvoice";
         invoice = this.commonService.postObject(url, invoice, Invoice.class);
 //        invoiceRepository.save(invoice);
         return new AddInvoicePayload(invoice);
@@ -135,11 +135,11 @@ public class Mutation implements GraphQLMutationResolver {
     public List<CmsStudentVo> getStudentList(StudentListFilterInput filter) throws Exception {
     	List<Student> list = this.studentFilterProcessor.searchStudent(filter);
     	List<CmsStudentVo> ls = new ArrayList<>();
-    	
+
     	String prefUrl = applicationProperties.getPrefSrvUrl();
     	for(Student student: list) {
     		CmsStudentVo vo = CommonUtil.createCopyProperties(student, CmsStudentVo.class);
-    		
+
     		String url = prefUrl+"/api/section-by-id/"+vo.getSectionId();
     		Section se = this.commonService.getObject(url, Section.class);
 //    		Section se = this.commonService.getSectionById(vo.getSectionId());
@@ -151,7 +151,7 @@ public class Mutation implements GraphQLMutationResolver {
     		url = prefUrl+"/api/department-by-id/"+vo.getDepartmentId();
     		Department de = this.commonService.getObject(url, Department.class);
 //    		Department de = this.commonService.getDepartmentById(vo.getDepartmentId());
-    		
+
     		url = prefUrl+"/api/batch-by-id/"+vo.getBatchId();
     		Batch ba = this.commonService.getObject(url, Batch.class);
 //    		Batch ba = this.commonService.getBatchById(vo.getBatchId());
