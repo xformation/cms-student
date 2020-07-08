@@ -58,9 +58,9 @@ public class Mutation implements GraphQLMutationResolver {
 
     public AddInvoicePayload addInvoice(AddInvoiceInput addInvoiceInput) {
     	Invoice invoice   = new Invoice();
-
+        String feeurl = applicationProperties.getFeeSrvUrl();
     	if(addInvoiceInput.getFeeCategoryId() != null) {
-    		String url = this.applicationProperties.getFeeSrvUrl()+"/feecategory-by-id/"+addInvoiceInput.getFeeCategoryId();
+    		String url = feeurl+"/api/feecategory-by-id/"+addInvoiceInput.getFeeCategoryId();
     		FeeCategory obj = this.commonService.getObject(url, FeeCategory.class);
 //    		Optional<FeeCategory> feeCategory = feeCategoryRepository.findById(addInvoiceInput.getFeeCategoryId());
         	if(obj != null) {
@@ -68,7 +68,7 @@ public class Mutation implements GraphQLMutationResolver {
         	}
     	}
     	if(addInvoiceInput.getFeeDetailsId() != null) {
-    		String url = this.applicationProperties.getFeeSrvUrl()+"/feedetails-by-id/"+addInvoiceInput.getFeeDetailsId();
+    		String url = feeurl+"/api/feedetails-by-id/"+addInvoiceInput.getFeeDetailsId();
     		FeeDetails obj = this.commonService.getObject(url, FeeDetails.class);
 
 //    		Optional<FeeDetails> feeDetails = feeDetailsRepository.findById(addInvoiceInput.getFeeDetailsId());
@@ -77,7 +77,7 @@ public class Mutation implements GraphQLMutationResolver {
     		}
         }
     	if(addInvoiceInput.getDueDateId() != null) {
-    		String url = this.applicationProperties.getFeeSrvUrl()+"/duedate-by-id/"+addInvoiceInput.getDueDateId();
+    		String url = feeurl+"/api/duedate-by-id/"+addInvoiceInput.getDueDateId();
     		DueDate obj = this.commonService.getObject(url, DueDate.class);
 //    		Optional<DueDate> dueDate = dueDateRepository.findById(addInvoiceInput.getDueDateId());
     		if(obj != null) {
@@ -86,7 +86,7 @@ public class Mutation implements GraphQLMutationResolver {
     		}
     	}
     	if(addInvoiceInput.getPaymentRemainderId() != null) {
-    		String url = this.applicationProperties.getFeeSrvUrl()+"/paymentremainder-by-id/"+addInvoiceInput.getPaymentRemainderId();
+    		String url = feeurl+"/api/paymentremainder-by-id/"+addInvoiceInput.getPaymentRemainderId();
     		PaymentRemainder obj = this.commonService.getObject(url, PaymentRemainder.class);
 //    		Optional<PaymentRemainder> paymentRemainder = paymentRemainderRepository.findById(addInvoiceInput.getPaymentRemainderId());
     		if(obj != null) {
@@ -98,7 +98,8 @@ public class Mutation implements GraphQLMutationResolver {
 
     	invoice.setStudentId(addInvoiceInput.getStudentId());
         invoice.setBranchId(addInvoiceInput.getBranchId());
-        invoice.setAcademicYearId(addInvoiceInput.getAcademicyearId());
+        invoice.setAcademicYearId(addInvoiceInput.getAcademicYearId());
+        invoice.setDepartmentId(addInvoiceInput.getDepartmentId());
         invoice.setAmountPaid(addInvoiceInput.getAmountPaid());
         invoice.setModeOfPayment(addInvoiceInput.getModeOfPayment());
         invoice.setChequeNumber(addInvoiceInput.getChequeNumber());

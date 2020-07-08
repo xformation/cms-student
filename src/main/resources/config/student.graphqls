@@ -43,7 +43,8 @@ input AddInvoiceInput {
 	collegeId:              Long
 	branchId:               Long
 	studentId:              Long
-	academicyearId:         Long
+	academicYearId:         Long
+	departmentId:           Long
 }
 
 type AddInvoicePayload{
