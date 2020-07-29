@@ -463,6 +463,16 @@ public class CmsStudentService {
             isFilter = true;
         }
 
+        if(criteriaMap.get("batchId") != null) {
+            st.setBatchId(Long.parseLong(criteriaMap.get("batchId")));
+            isFilter = true;
+        }
+
+        if(criteriaMap.get("sectionId") != null) {
+            st.setSectionId(Long.parseLong(criteriaMap.get("sectionId")));
+            isFilter = true;
+        }
+
         List<Student> list = null;
         if(isFilter) {
             list = this.studentRepository.findAll(Example.of(st), Sort.by(Sort.Direction.DESC, "id"));
