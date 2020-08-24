@@ -3,6 +3,7 @@ scalar Date
 type Query {
 	getInvoices(studentId: Long, branchId: Long): [CmsInvoice]
 	createStudentFilterDataCache: StudentFilterDataCache
+	getFacilities: [Facility]
 }
 
 type Mutation {
@@ -200,7 +201,7 @@ input StudentInput {
 	batchId:                                Long
 	sectionId:                              Long
 	branchId:                               Long
-
+    facilityId:                            Long
 	strCreatedOn:                           String
 	strUpdatedOn:                           String
 	strDisabilityCertificateIssueDate:      String
@@ -334,6 +335,7 @@ type CmsStudentVo {
 	batchId:                                Long
 	sectionId:                              Long
 	branchId:                               Long
+	facilityId:                             Long
 
     section :                               Section
  	batch :                                 Batch
@@ -374,8 +376,6 @@ type Facility {
 	academicYearId:		Long
 	branchId:           Long
 	amount:             Long
-	branchName:         String
-	academicYearDesc:   String
 }
 
 type Student {
